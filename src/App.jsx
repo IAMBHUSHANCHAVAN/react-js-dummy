@@ -28,8 +28,11 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
 
+
+        heldm;lxm;l
+      </p>
+{/* <head>new commit</head> */}
       <Dummy/>
     </>
   )
