@@ -1,52 +1,21 @@
 import './App.css'
 import Dummy from './components/Dummy'
-import { useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
+import Test2 from './components/Test2'
+import Button from './components/Button'
 
+
+const CountContext = createContext(null);
 function App() {
-
-
-  const[product,setProduct]=useState([])
-  const[loading,setLoading]= useState(true)
-
-
-  const fetData = async ()=>{
-    setLoading(true)
-    const response = await fetch("https://fakestoreapi.com/products")
-    const data = await response.json()
-    console.log("data",data)
-    setProduct(data)
-    setLoading(false)
-  }
-
-
-
-  useEffect(()=>{
-    fetData()
-  },[])
-
-
-
-
-
+  const[count,setCount]= useState(10)
 
   return (
-    <>
-   {
-
-    loading ? <>loading</>:
-
-    product.map((item,i)=>{
-      return <div key={i} style={{display:"flex",gap:"10px"}}>
-        <img height={100} width={100} src={item.image} alt={item.name} />
-        <h2>{item.name}</h2>
-        <p>{item.description}</p>
-        <p>{item.price}</p>
-        <a href={`product/${item.id}`}>Buy</a>
-      </div>
-    })
-   }
-    </>
+    <CountContext.Provider value={{count,setCount}}>
+      <p>count in App component {count}</p>
+<Button text='increment' onClick={()=>setCount(count+1)} />
+      <Test2  />
+    </CountContext.Provider>
   )
 }
-
+export { CountContext }
 export default App
